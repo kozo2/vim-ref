@@ -20,7 +20,9 @@ endfunction
 
 function! s:source.get_body(query)
   if a:query != ''
+    let query = printf('help(%s)', a:query)
     let content = ref#system(ref#to_list(g:ref_R_cmd, a:query)).stdout
+    " return join(split(content, '\n')[1:], '\n')
     return substitute(join(split(content, '\n')[1:-3], "\n"), "_\<C-h>", '', 'g')
   endif
 endfunction
